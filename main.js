@@ -51,18 +51,46 @@ function organizeFn(dirPath)
         }
     }
     organizeHealper(dirPath,destpath);
-
-    // 4.copy/cut files to that organized directory.
-
 }
 
 function organizeHealper(dirPath,destpath)
 {
         // 3.identify categories of all the files present  in that  input directory ->
+        let childName = fs.readdirSync(src);
+        for(let i=0;i<childName.length;i++)
+        {
+            let childAddress = path.join(src,childName[i])
+            let isFile =  fs.lstatSync(childAddress).isFile();
+            if(isFile)
+            {
+                // console.log(childName[i]);
+                // 4.copy/cut files to that organized directory.
+                let category = getCategory(childName[i]);
+                console.log(childName[i],"belongs to -->",category );
+
+            }
+        }
 
 
 }
-
+function getCategory(name)
+{
+    let ext = path.extname(name);
+    // console.log(ext);
+    ext = ext.slice(1);
+    for(let type in types)
+    {
+        let cTypeArray = types[type];
+        for(let i=0;i<cTypeArray;i++)
+        {
+            if(ext == cTypeArray[i]){
+                return type;
+            }
+            
+        }
+        return "others";
+    }
+}
 
 function helpFn(dirPath)
 {
