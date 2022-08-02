@@ -1,5 +1,7 @@
 let inputArr = process.argv.slice(2);
-console.log(inputArr);
+let fs = require('fs');
+let path =  require('path');
+// console.log(inputArr);
 
 let command = inputArr[0];
 
@@ -25,8 +27,43 @@ function treeFn(dirPath)
 }
 function organizeFn(dirPath)
 {
-    console.log("organize command implemented");
+    let destpath;
+    // console.log("organize command implemented");
+    // 1.input -> directory path given 
+    if(dirPath== undefined){
+        console.log("Kindly enter the path");
+        return ;
+    }
+    else {
+        let doesexist = fs.existsSync(dirPath);
+        if(doesexist)
+        {
+            // 2.create -> organized_file -> directory
+            destpath = path.join(dirPath ,"organized_path");
+            if(fs.existsSync(destpath)==false)
+            {
+                fs.mkdirSync(destpath);
+            }
+        }
+        else {
+            console.log("Kindly enter the correct path ");
+            return;
+        }
+    }
+    organizeHealper(dirPath,destpath);
+
+    // 4.copy/cut files to that organized directory.
+
 }
+
+function organizeHealper(dirPath,destpath)
+{
+        // 3.identify categories of all the files present  in that  input directory ->
+
+
+}
+
+
 function helpFn(dirPath)
 {
     console.log(`List of all the commands:
