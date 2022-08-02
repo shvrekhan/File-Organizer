@@ -11,6 +11,7 @@ switch(command){
         break;
     
     case "help":
+        helpFn();
         break;
     
     default:
@@ -28,5 +29,8 @@ function organizeFn(dirPath)
 }
 function helpFn(dirPath)
 {
-    console.log("help command implemented");
+    console.log(`List of all the commands:
+                    1. node main.js tree "directorypath"
+                    2. node main.js organize "directorypath"
+                    3. node main.js help`);
 }
